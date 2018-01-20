@@ -1,0 +1,4 @@
+export CFLAGS="-m64"  # if you're using GCC
+export CPPFLAGS="-I/opt/csw/include"
+export LDFLAGS="-L/opt/csw/lib/64 -R/opt/csw/lib/64"
+export PKG_CONFIG_PATH="/opt/csw/lib/64/pkgconfig"

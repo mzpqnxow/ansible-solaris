@@ -1,0 +1,101 @@
+- name: Copy nocheck file to avoid prompts from hanging pkg operations
+  copy:
+    src: nocheck
+    dest: /var/sadm/install/admin/default
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - csw
+
+- name: Copy 32-bit CSW shell files to prep for autotools
+  copy:
+    src: cswrc.32
+    dest: '{{ item.home }}/.cswrc.32'
+    owner: '{{ item.owner }}'
+    mode: 0644
+  with_items: '{{ bootstrap_user_info }}'
+  tags:
+    - csw
+
+- name: Copy 64-bit CSW shell files to prep for autotools
+  copy:
+    src: cswrc.64
+    dest: '{{ item.home }}/.cswrc.64'
+    owner: '{{ item.owner }}'
+    mode: 0644
+  with_items: '{{ bootstrap_user_info }}'
+  tags:
+    - csw
+
+- name: Copy csw shell files to prep for autotools
+  copy:
+    src: swrc.32
+    dest: '{{ item.home }}/swrc.32'
+    owner: '{{ item.name }}'
+    mode: 0644
+
+- name: Add CSW repository
+  # The following should work, but does not seem to anymore
+  # So just get the binary package and install it directly
+  # shell: /usr/sbin/pkgadd -d http://get.opencsw.org/now
+  get_url:
+    url: http://mirror.opencsw.org/opencsw/pkgutil.pkg
+    dest: /tmp/pkgutil.pkg
+  tags:
+    - csw
+
+- name: Update CSW repository
+  shell: '{{ item }}'
+  with_items:
+    - yes all | /usr/sbin/pkgadd -n -a default -d /tmp/pkgutil.pkg
+    - /opt/csw/bin/pkgutil -U
+    - /opt/csw/bin/pkgutil -y -i {{ packages|join(' ') }}
+  tags:
+    - csw
+    - test
+
+- name: Remove tmp file
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - /tmp/pkgutil.pkg
+    - /etc/sudoers.d/svc-system-config-user
+  tags:
+    - csw
+
+- name: Get GDB init file installer
+  # The following should work, but does not seem to anymore
+  # So just get the binary package and install it directly
+  # shell: /usr/sbin/pkgadd -d http://get.opencsw.org/now
+  get_url:
+    url: https://github.com/hugsy/gef/raw/master/gef.sh 
+    dest: /tmp/gef.sh
+    mode: 0755
+  tags:
+    - gdb
+
+- name: Install GDB init files
+  shell: sh /tmp/gef.sh
+  with_items:
+    - '{{ gdb_users }}'
+  become: yes
+  become_method: sudo
+  become_user: '{{ item }}'
+  tags:
+    - gdb
+
+#- name: Download gdb
+
+
+- name: Add CSW repository
+  # The following should work, but does not seem to anymore
+  # So just get the binary package and install it directly
+  # shell: /usr/sbin/pkgadd -d http://get.opencsw.org/now
+  get_url:
+    url: https://ftp.gnu.org/gnu/gdb/gdb-8.0.tar.gz
+    dest: /tmp/gdb-8.0.tar.gz
+  tags:
+    - gdb8
+

@@ -1,0 +1,53 @@
+---
+# A regular user, the superuser, and a list of additional regular
+# users to authorize the SSH key for
+
+# Primary user
+system_user:
+  name: user
+  home: /export/home/user
+  key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOSouuOks1ESjl1cfhOkY5kLJcfwzh3HWpuYSQCSC+woRsWLKKCk1WjygEPUipI6MIQOlWpFfu7+VwzyPXC04UxGfAL5Fq69vOdJQTvXug4P+7XZJ1FAo+vzVPqack1llaU1DQZCWqdgTXARFBYSQkl2s5EekHPpeVvtxocNw6QLu9JuLj3zbomwqMMKbRoKsvgIHUAZLS+B0507Mbx45b9nZniLsb1USPN6f8ftz9MAvj8tiNuhZMI25FJrVPy/WSH19FPa7r26W2+DmbDHY0u4OzrCLMh8f5q6ccfM+SX0FxrR6woZT6fnBDz7qnDLucH/HH24vCNgNDOl9ZNDmUxHSOGPy8C6FHWcWn5xTJzN1/KdsVztScZorLie/xFclBeEEsIU15pWhWQ8ymoOlrTLapIDiyW8pDzZZAQrwMUKOFqBX1keodHOE+dxU1oAiwS+4LexkErDUDC9oFgIt92aM0qpd6oYESef3X9bjduVXNerxvk/VQgSI23myWO1SRbpDZctxdqjGb6kWb2aP4FRYEqZ3TH8UXDIGo3eXFOamIqY7UJtIltODeBX3sClEC8pGB8g6kGC7ZAKZ7oAQ3LpD1BhS01XK+YxIxqGJ5hRLz2csmP84r1chrz7rMHFxZAa/xL3+sAgW5d6oWX8SM8QltBxoN9UNIKEdPIHmpBw== dude@dude'
+  type: user	
+
+# Superuser
+system_superuser:
+  name: root
+  home: /root
+  key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOSouuOks1ESjl1cfhOkY5kLJcfwzh3HWpuYSQCSC+woRsWLKKCk1WjygEPUipI6MIQOlWpFfu7+VwzyPXC04UxGfAL5Fq69vOdJQTvXug4P+7XZJ1FAo+vzVPqack1llaU1DQZCWqdgTXARFBYSQkl2s5EekHPpeVvtxocNw6QLu9JuLj3zbomwqMMKbRoKsvgIHUAZLS+B0507Mbx45b9nZniLsb1USPN6f8ftz9MAvj8tiNuhZMI25FJrVPy/WSH19FPa7r26W2+DmbDHY0u4OzrCLMh8f5q6ccfM+SX0FxrR6woZT6fnBDz7qnDLucH/HH24vCNgNDOl9ZNDmUxHSOGPy8C6FHWcWn5xTJzN1/KdsVztScZorLie/xFclBeEEsIU15pWhWQ8ymoOlrTLapIDiyW8pDzZZAQrwMUKOFqBX1keodHOE+dxU1oAiwS+4LexkErDUDC9oFgIt92aM0qpd6oYESef3X9bjduVXNerxvk/VQgSI23myWO1SRbpDZctxdqjGb6kWb2aP4FRYEqZ3TH8UXDIGo3eXFOamIqY7UJtIltODeBX3sClEC8pGB8g6kGC7ZAKZ7oAQ3LpD1BhS01XK+YxIxqGJ5hRLz2csmP84r1chrz7rMHFxZAa/xL3+sAgW5d6oWX8SM8QltBxoN9UNIKEdPIHmpBw== dude@dude'
+  type: role
+
+shell_init_lines:
+  - '[[ -f /etc/bash/bashrc.example ]] && source /etc/bash/bashrc.example'
+  - '[[ -f ~/.bashrc ]] && source ~/.bashrc'
+  - '[[ -f /etc/bash/bash_completion.example ]] && source /etc/bash/bash_completion.example'
+  - 'export PATH=/opt/csw/bin:$PATH'
+
+gdb_users:
+  - root
+  - user
+
+packages:
+  - gdb
+  - vim
+  - nano
+  - screen
+  - sudo
+  - gcc4core
+  - gsed
+  - ggrep
+  - binutils
+  - coreutils
+  - python27
+  - python27_dev
+  - libisl_dev
+  - bison
+  - flex
+  - autoconf
+  - automake
+  - libtool
+  - gcc4g++
+  - lsof
+  - gtar
+
+# Additional users
+system_users:

@@ -1,0 +1,6 @@
+
+- name: Unset publisher
+  shell: pkg unset-publisher solaris
+
+- name: Set new publisher
+  shell: pkg set-publisher -P -g http://pkg.oracle.com/solaris/release/ solaris

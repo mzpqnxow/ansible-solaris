@@ -1,2 +1,7 @@
-# ansible-solaris-bootstrap
-Bootstrap a Solaris 11 machine with the CSW package repository, some packages, and a few other basic things
+# ansible-solaris
+
+An Ansible role and playbook and distribution for bootstrapping solaris machines
+
+## Usage
+
+Make sure you source bashrc (and adjust the content before, if necessary)

@@ -1,0 +1,5 @@
+[all]
+solaris11 ansible_host=10.1.1.39 ansible_su_pass='Welcome123!'
+
+[solaris]
+solaris11 ansible_host=10.1.1.39 ansible_su_pass='Welcome123!'

@@ -1,0 +1,44 @@
+---
+# tasks file for role-solaris-bootstrap
+
+
+#
+# Make the system more comfortable by installing some (mostly GNU)
+# CSW (https://www.opencsw.org/) packages like gcc4core, sudo, gdb,
+# etc. Also install a NOPASSWD sudoers rule based on vars
+#
+# Also, install su
+#
+
+- name: Set up CSW
+  import_tasks: csw.yml
+
+- name: Set up CSW sudo
+  import_tasks: sudo.yml
+
+- name: Set up Bash
+  import_tasks: bash.yml
+
+- name: Set up SSH keys
+  import_tasks: keys.yml
+
+- name: Set PKG info
+  import_tasks: pkg.yml
+
+# Get your certificate and key from Oracle/Sun
+#
+# - name: Copy oracle certs for Sun Studio
+#   copy:
+#     src: '{{ item }}'
+#     dest: '/var/pkg/ssl/{{ item }}'
+#     owner: root
+#     group: root
+#     mode: 0600
+#   with_items:
+#     - pkg.oracle.com.certificate.pem
+#     - pkg.oracle.com.key.pem
+#   tags:
+#     - sunstudio
+#
+# 
+#

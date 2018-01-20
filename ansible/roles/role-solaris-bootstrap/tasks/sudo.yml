@@ -1,0 +1,9 @@
+- name: Install NOPASSWD sudo for users
+  template:
+    src: nopasswd.j2
+    dest: /etc/opt/csw/sudoers.d/nopasswd2
+    owner: root
+    group: root
+    mode: 0600
+  tags:
+    - sudo

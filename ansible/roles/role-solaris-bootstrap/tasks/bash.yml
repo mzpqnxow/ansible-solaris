@@ -1,0 +1,24 @@
+- name: Change login shells to bash
+  shell: '{{ item.type }}mod -s /bin/bash {{ item.name }}'
+  with_items:
+    - system_user
+    - system_superuser
+    - system_users
+  tags:
+    - shell
+
+#
+# Place multiple lines into each users bash profile
+#
+- name:
+  lineinfile:
+    path: '{{ item[0].home }}/.bash_profile'
+    line: '{{ item[1] }}'
+    owner: '{{ item[0].owner }}'
+    mode: 0644
+    create: yes
+  with_nested:
+    - '{{ bootstrap_user_info }}'
+    - '{{ shell_init_lines }}'
+  tags:
+    - shell

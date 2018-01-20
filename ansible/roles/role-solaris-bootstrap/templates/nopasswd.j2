@@ -1,0 +1,4 @@
+
+{% for user_or_group in sudo_nopasswd_users_and_groups %}{{ user_or_group }} ALL=(ALL:ALL) NOPASSWD:ALL
+{% endfor %}
+

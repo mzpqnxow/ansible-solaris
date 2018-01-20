@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Adam Greene
+  description: Solaris 11 bootstrap role
+  issue_tracker_url: https://github.com/mzpqnxow/role-ansible-solaris11-bootstrap
+  license: 3-Clause BSD
+  min_ansible_version: 2.1
+  github_branch: master
+  platforms:
+  - name: Solaris
+    versions:
+      - 11
+      - 11.1
+      - 11.2
+      - 11.3
+  galaxy_tags: []
+
+dependencies: []

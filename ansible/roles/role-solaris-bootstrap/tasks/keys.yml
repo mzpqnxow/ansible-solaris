@@ -1,0 +1,10 @@
+- name: Set authorized key for users
+  authorized_key:
+    user: '{{ item.name }}'
+    state: present
+    key: '{{ item.key }}'
+  with_items:
+    - '{{ system_superuser }}'
+    - '{{ system_user }}'
+  tags:
+    - authorized_keys
